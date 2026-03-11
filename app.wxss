@@ -1,0 +1,101 @@
+/** app.wxss **/
+
+/* 全局背景和字体：强制开启苹果系统抗锯齿 */
+page {
+  background-color: #F2F2F7; /* iOS标准系统背景色 */
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 页面通用容器 */
+.page-container {
+  padding: 40rpx 30rpx 80rpx;
+}
+
+/* 苹果风大标题 */
+.large-title {
+  font-size: 60rpx;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: -1rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 分组标题 */
+.section-header {
+  font-size: 26rpx;
+  color: #8E8E93;
+  text-transform: uppercase;
+  margin: 40rpx 0 16rpx 30rpx;
+}
+
+/* iOS List Group 容器：圆角白底列表 */
+.list-group {
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 30rpx;
+}
+
+/* 列表项 */
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx;
+  border-bottom: 1rpx solid #E5E5EA;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+/* 列表内文字 */
+.item-label {
+  font-size: 32rpx;
+  color: #000;
+}
+
+.val-text {
+  font-size: 32rpx;
+  color: #8E8E93;
+}
+
+.blue {
+  color: #007AFF !important;
+}
+
+/* 幽灵输入框 */
+.ghost-input {
+  text-align: right;
+  font-size: 32rpx;
+  color: #007AFF;
+  font-weight: 500;
+}
+
+/* 苹果风主按钮 */
+.primary-btn {
+  background: #007AFF;
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 600;
+  border-radius: 24rpx;
+  padding: 24rpx 0;
+  margin: 60rpx 0;
+  box-shadow: 0 10rpx 30rpx rgba(0, 122, 255, 0.3);
+}
+
+/* 苹果风卡片 */
+.ios-card {
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.03);
+}
+
+.divider-line {
+  height: 1rpx;
+  background: #E5E5EA;
+  margin: 30rpx 0;
+}

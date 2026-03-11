@@ -1,0 +1,23 @@
+<view class="page-container">
+  <view class="large-title">身体档案</view>
+  <view class="section-header">这些基础数据将用于计算你的精准配额</view>
+
+  <view class="list-group">
+    <view class="list-item">
+      <text class="item-label">性别</text>
+      <picker bindchange="changeGender" range="{{['男性', '女性']}}">
+        <text class="val-text blue">{{isMale ? '男性' : '女性'}} 〉</text>
+      </picker>
+    </view>
+    <view class="list-item">
+      <text class="item-label">年龄 (岁)</text>
+      <input class="ghost-input" type="number" value="{{age}}" bindinput="inputAge" placeholder="如: 23" />
+    </view>
+    <view class="list-item">
+      <text class="item-label">身高 (cm)</text>
+      <input class="ghost-input" type="number" value="{{height}}" bindinput="inputHeight" placeholder="如: 178" />
+    </view>
+  </view>
+
+  <button class="primary-btn" bindtap="saveProfile">保存档案并返回</button>
+</view>

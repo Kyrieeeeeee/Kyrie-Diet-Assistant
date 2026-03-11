@@ -1,0 +1,29 @@
+/* 档案卡片特有样式 */
+.profile-summary-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 40rpx !important;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+
+.p-left { display: flex; align-items: center; }
+
+.p-icon {
+  font-size: 70rpx;
+  background: #F2F2F7;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 100rpx;
+  margin-right: 25rpx;
+}
+
+.p-labels { display: flex; flex-direction: column; }
+.p-main-title { font-size: 34rpx; font-weight: 700; color: #000; }
+.p-sub-title { font-size: 26rpx; color: #8E8E93; margin-top: 4rpx; }
+
+.modify-btn { font-size: 28rpx; color: #C7C7CC; }
+.weight-text { font-size: 44rpx; font-weight: 800; color: #007AFF; }

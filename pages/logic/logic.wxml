@@ -1,0 +1,34 @@
+<view class="page-container" style="background: #111; min-height: 100vh; padding: 40rpx 30rpx;">
+  <view class="large-title" style="color: #fff; margin-bottom: 40rpx;">底层饮食逻辑解析</view>
+  
+  <view class="ios-card article-card" style="background: #1C1C1E; border-radius: 32rpx; padding: 40rpx; margin-bottom: 40rpx;">
+    <view class="paragraph" style="font-size: 30rpx; color: #E5E5EA; line-height: 1.8; margin-bottom: 30rpx; text-align: justify;">
+      针对身高 <text style="color:#007AFF; font-weight:800; font-size:34rpx;">{{p.height}}</text>cm、当前体重 <text style="color:#007AFF; font-weight:800; font-size:34rpx;">{{w}}</text>kg、年龄 <text style="color:#007AFF; font-weight:800; font-size:34rpx;">{{p.age}}</text>岁的<text style="color:#007AFF; font-weight:800; font-size:34rpx;">{{p.isMale ? '男' : '女'}}</text>性，系统采用精准热量方程判定您的基础代谢 (BMR) 为 <text style="color:#34C759; font-weight:bold;">{{bmr}} kcal</text>。
+    </view>
+
+    <view class="paragraph" style="font-size: 30rpx; color: #E5E5EA; line-height: 1.8; margin-bottom: 30rpx; text-align: justify;">
+      综合日常活动与运动消耗，您的每日总能量消耗 (TDEE) 约为 <text style="color:#34C759; font-weight:bold;">{{tdee}} kcal</text>。基于<text style="color:#FF9500; font-weight:bold; background:rgba(255,149,0,0.1); padding:4rpx 10rpx; border-radius:8rpx;">{{goalText}}</text>的目标设定，您的全天建议摄入锁定在 <text style="color:#FF3B30; font-weight:900; font-size:36rpx;">{{targetCal}} kcal</text>。
+    </view>
+
+    <view style="height: 1rpx; background: #333; margin: 40rpx 0;"></view>
+
+    <view class="paragraph" style="font-size: 30rpx; color: #E5E5EA; line-height: 1.8; margin-bottom: 30rpx; text-align: justify;">
+      <text style="font-weight:bold; color:#fff; display:block; margin-bottom:10rpx;">💡 科学宏量分配逻辑：</text>
+      1. 系统预先锁定了 <text style="color:#32ADE6; font-weight:800; font-size:36rpx;">{{fatG}}g</text> 的必需脂肪酸配额，以维持基础代谢与生理健康。
+      2. 剩余热量中，分配了 <text style="color:#FFD60A; font-weight:800; font-size:36rpx;">{{carbG}}g</text> 给碳水化合物 (占热量比{{carbPercent}})，保障高强度运动表现；
+      3. 分配了 <text style="color:#FF453A; font-weight:800; font-size:36rpx;">{{proteinG}}g</text> 给蛋白质 (占热量比{{proPercent}})，最大化肌肉重组效率。
+    </view>
+
+    <view style="height: 1rpx; background: #333; margin: 40rpx 0;"></view>
+
+    <view class="paragraph" style="font-size: 30rpx; color: #E5E5EA; line-height: 1.8; text-align: justify;">
+      <text style="font-weight:bold; color:#fff; display:block; margin-bottom:10rpx;">⏳ 能量调度原理：</text>
+      今日判定：<text style="color:#BF5AF2; font-weight:bold; font-size:32rpx;">{{timeText}}</text>。系统核心逻辑在于“营养物质的高效调度”。通过将大部分营养素集中在<text style="color:#FF3B30; font-weight:bold;">练后窗口期</text>，利用胰岛素敏感性的提升将营养定向引导至目标组织，从而在受控热量下实现更佳的身体重组效果。
+    </view>
+  </view>
+
+  <view style="margin-top:20rpx; padding:0 20rpx;">
+    <view style="font-family:monospace; color:#8E8E93; font-size:24rpx; line-height:1.8; text-align:center;">BMR = 9.99×W + 6.25×H - 4.92×A {{p.isMale?'+5':'-161'}}</view>
+    <view style="font-family:monospace; color:#8E8E93; font-size:24rpx; line-height:1.8; text-align:center;">TDEE = (BMR÷0.7) {{isTrain ? (p.isMale?'+200':'+150') : '+0'}}</view>
+  </view>
+</view>

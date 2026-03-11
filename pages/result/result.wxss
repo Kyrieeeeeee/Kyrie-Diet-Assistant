@@ -1,0 +1,8 @@
+.post-card { border: 2rpx solid #007AFF; background: #F2F8FF; }
+.big-num { font-size: 56rpx; font-weight: 700; color: #000; letter-spacing: -2rpx; margin: 0 6rpx; }
+.blue-bold { color: #007AFF; font-weight: 700; }
+.or-text { font-size: 24rpx; color: #C7C7CC; text-align: center; margin: 20rpx 0; }
+/* 新增的营养率小灰字样式 */
+.rate-note { font-size: 24rpx; color: #8E8E93; margin-left: 10rpx; font-weight: normal; }
+.unit-text { font-size: 28rpx; color: #000; margin-right: 10rpx; font-weight: bold;}
+.post-card { border: 4rpx solid #007AFF; background: #F2F8FF; } /* 让核心餐更醒目 */

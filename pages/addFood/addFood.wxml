@@ -1,0 +1,49 @@
+<view class="page-container">
+  <view class="large-title">新增食材</view>
+
+  <view class="section-header">基础信息</view>
+  <view class="list-group">
+    <view class="list-item">
+      <text class="item-label">名称</text>
+      <input class="ghost-input" placeholder="如: 澳洲燕麦块" bindinput="inputName" />
+    </view>
+    <view class="list-item">
+      <text class="item-label">分类</text>
+      <picker bindchange="changeType" range="{{['碳水主食', '蛋白质来源']}}">
+        <text class="val-text blue">{{typeIdx == 0 ? '碳水主食' : '蛋白质来源'}} 〉</text>
+      </picker>
+    </view>
+  </view>
+
+  <view class="section-header">营养成分 (参考包装袋)</view>
+  <view class="list-group">
+    <view class="list-item">
+      <text class="item-label">基准重量 (g)</text>
+      <input class="ghost-input" type="number" placeholder="如: 1000" bindinput="inputRefW" />
+    </view>
+    <view class="list-item">
+      <text class="item-label">含营养素 (g)</text>
+      <input class="ghost-input" type="digit" placeholder="如: 600" bindinput="inputNutriW" />
+    </view>
+  </view>
+
+  <view class="section-header">生活单位 (选填)</view>
+  <view class="list-group">
+    <view class="list-item">
+      <text class="item-label">启用自定义单位 (如:块/碗)</text>
+      <switch color="#007AFF" bindchange="toggleUnit"/>
+    </view>
+    <block wx:if="{{hasUnit}}">
+      <view class="list-item">
+        <text class="item-label">单位名称</text>
+        <input class="ghost-input" placeholder="如: 块" bindinput="inputUnitName" />
+      </view>
+      <view class="list-item">
+        <text class="item-label">每单位重量 (g)</text>
+        <input class="ghost-input" type="number" placeholder="如: 50" bindinput="inputUnitW" />
+      </view>
+    </block>
+  </view>
+
+  <button class="primary-btn" bindtap="save">存储至本地库</button>
+</view>
