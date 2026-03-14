@@ -37,6 +37,23 @@
         <text class="val-text blue">{{times[timeIdx]}} 〉</text>
       </picker>
     </view>
+    
+    <view class="list-item" style="border-top: 1rpx solid #E5E5EA;">
+      <text class="item-label">包含有氧训练</text>
+      <switch bindchange="toggleAerobic" checked="{{isAerobic}}" color="#34C759" />
+    </view>
+    <block wx:if="{{isAerobic}}">
+      <view class="list-item">
+        <text class="item-label">有氧项目</text>
+        <picker bindchange="changeAerobic" range="{{aerobicOptions}}" range-key="name">
+          <text class="val-text blue">{{aerobicOptions[aerobicIdx].name}} 〉</text>
+        </picker>
+      </view>
+      <view class="list-item">
+        <text class="item-label">当日运动时长(小时)</text>
+        <input class="ghost-input" type="digit" value="{{aerobicHours}}" bindinput="inputAerobicHours" placeholder="如: 0.5 或 1.0" />
+      </view>
+    </block>
   </view>
 
   <view class="section-header">今日食材调用</view>

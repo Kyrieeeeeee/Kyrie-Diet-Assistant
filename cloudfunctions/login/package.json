@@ -1,0 +1,12 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "config": {
+    "wx-server-sdk": "latest"
+  },
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

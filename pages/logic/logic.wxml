@@ -7,7 +7,7 @@
     </view>
 
     <view class="paragraph" style="font-size: 30rpx; color: #E5E5EA; line-height: 1.8; margin-bottom: 30rpx; text-align: justify;">
-      综合日常活动与运动消耗，您的每日总能量消耗 (TDEE) 约为 <text style="color:#34C759; font-weight:bold;">{{tdee}} kcal</text>。基于<text style="color:#FF9500; font-weight:bold; background:rgba(255,149,0,0.1); padding:4rpx 10rpx; border-radius:8rpx;">{{goalText}}</text>的目标设定，您的全天建议摄入锁定在 <text style="color:#FF3B30; font-weight:900; font-size:36rpx;">{{targetCal}} kcal</text>。
+      综合日常活动、力量训练<block wx:if="{{isAerobic}}">以及额外 <text style="color:#34C759; font-weight:bold;">{{aerobicBurn}} kcal</text> 的有氧热量补偿</block>，您的每日总能量消耗 (TDEE) 约为 <text style="color:#34C759; font-weight:bold;">{{tdee}} kcal</text>。基于<text style="color:#FF9500; font-weight:bold; background:rgba(255,149,0,0.1); padding:4rpx 10rpx; border-radius:8rpx;">{{goalText}}</text>的目标设定，您的全天建议摄入锁定在 <text style="color:#FF3B30; font-weight:900; font-size:36rpx;">{{targetCal}} kcal</text>。
     </view>
 
     <view style="height: 1rpx; background: #333; margin: 40rpx 0;"></view>
@@ -23,12 +23,12 @@
 
     <view class="paragraph" style="font-size: 30rpx; color: #E5E5EA; line-height: 1.8; text-align: justify;">
       <text style="font-weight:bold; color:#fff; display:block; margin-bottom:10rpx;">⏳ 能量调度原理：</text>
-      今日判定：<text style="color:#BF5AF2; font-weight:bold; font-size:32rpx;">{{timeText}}</text>。系统核心逻辑在于“营养物质的高效调度”。通过将大部分营养素集中在<text style="color:#FF3B30; font-weight:bold;">练后窗口期</text>，利用胰岛素敏感性的提升将营养定向引导至目标组织，从而在受控热量下实现更佳的身体重组效果。
+      今日判定：<text style="color:#BF5AF2; font-weight:bold; font-size:32rpx;">{{timeText}}</text><block wx:if="{{isAerobic}}"> | 有氧：<text style="color:#34C759; font-weight:bold; font-size:32rpx;">{{aerobicText}}</text></block>。系统核心逻辑在于“营养物质的高效调度”。通过将大部分营养素集中在<text style="color:#FF3B30; font-weight:bold;">练后窗口期</text>，利用胰岛素敏感性的提升将营养定向引导至目标组织，从而在受控热量下实现更佳的身体重组效果。
     </view>
   </view>
 
   <view style="margin-top:20rpx; padding:0 20rpx;">
     <view style="font-family:monospace; color:#8E8E93; font-size:24rpx; line-height:1.8; text-align:center;">BMR = 9.99×W + 6.25×H - 4.92×A {{p.isMale?'+5':'-161'}}</view>
-    <view style="font-family:monospace; color:#8E8E93; font-size:24rpx; line-height:1.8; text-align:center;">TDEE = (BMR÷0.7) {{isTrain ? (p.isMale?'+200':'+150') : '+0'}}</view>
+    <view style="font-family:monospace; color:#8E8E93; font-size:24rpx; line-height:1.8; text-align:center;">TDEE = (BMR÷0.7) {{isTrain ? (p.isMale?'+200':'+150') : '+0'}}{{isAerobic ? ' +有氧补偿' + aerobicBurn : ''}}</view>
   </view>
 </view>
