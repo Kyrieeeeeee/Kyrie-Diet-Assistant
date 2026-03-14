@@ -1,49 +1,65 @@
 <view class="page-container">
-  <view class="large-title">新增食材</view>
+  <view class="large-title">{{editIdx > -1 ? '修改食材' : '新增食材'}}</view>
 
   <view class="section-header">基础信息</view>
   <view class="list-group">
     <view class="list-item">
       <text class="item-label">名称</text>
-      <input class="ghost-input" placeholder="如: 澳洲燕麦块" bindinput="inputName" />
+      <input class="ghost-input" placeholder="请输入食材名称" bindinput="inputName" value="{{name}}" />
     </view>
     <view class="list-item">
-      <text class="item-label">分类</text>
-      <picker bindchange="changeType" range="{{['碳水主食', '蛋白质来源']}}">
-        <text class="val-text blue">{{typeIdx == 0 ? '碳水主食' : '蛋白质来源'}} 〉</text>
-      </picker>
+      <text class="item-label">设为复合食物</text>
+      <switch color="#007AFF" bindchange="toggleCombo" checked="{{isCombo}}" disabled="{{editIdx > -1}}" />
     </view>
   </view>
 
-  <view class="section-header">营养成分 (参考包装袋)</view>
-  <view class="list-group">
-    <view class="list-item">
-      <text class="item-label">基准重量 (g)</text>
-      <input class="ghost-input" type="number" placeholder="如: 1000" bindinput="inputRefW" />
-    </view>
-    <view class="list-item">
-      <text class="item-label">含营养素 (g)</text>
-      <input class="ghost-input" type="digit" placeholder="如: 600" bindinput="inputNutriW" />
-    </view>
-  </view>
-
-  <view class="section-header">生活单位 (选填)</view>
-  <view class="list-group">
-    <view class="list-item">
-      <text class="item-label">启用自定义单位 (如:块/碗)</text>
-      <switch color="#007AFF" bindchange="toggleUnit"/>
-    </view>
-    <block wx:if="{{hasUnit}}">
+  <block wx:if="{{!isCombo}}">
+    <view class="list-group">
       <view class="list-item">
-        <text class="item-label">单位名称</text>
-        <input class="ghost-input" placeholder="如: 块" bindinput="inputUnitName" />
+        <text class="item-label">分类</text>
+        <picker bindchange="changeType" range="{{['碳水主食', '蛋白质来源']}}">
+          <text class="val-text blue">{{typeIdx == 0 ? '碳水主食' : '蛋白质来源'}} 〉</text>
+        </picker>
+      </view>
+    </view>
+    <view class="section-header">营养成分</view>
+    <view class="list-group">
+      <view class="list-item">
+        <text class="item-label">基准重量 (g)</text>
+        <input class="ghost-input" type="number" placeholder="100" bindinput="inputRefW" />
       </view>
       <view class="list-item">
-        <text class="item-label">每单位重量 (g)</text>
-        <input class="ghost-input" type="number" placeholder="如: 50" bindinput="inputUnitW" />
+        <text class="item-label">含营养素 (g)</text>
+        <input class="ghost-input" type="digit" placeholder="30" bindinput="inputNutriW" />
       </view>
-    </block>
-  </view>
+    </view>
+  </block>
 
-  <button class="primary-btn" bindtap="save">存储至本地库</button>
+  <block wx:else>
+    <view class="section-header">🍱 复合组装</view>
+    <view class="list-group">
+      <view class="list-item">
+        <text class="item-label">包含碳水来源</text>
+        <picker bindchange="changeComboCarb" range="{{carbList}}" range-key="name">
+          <text class="val-text blue">{{comboCarbIdx > -1 ? carbList[comboCarbIdx].name : '点击选择'}} 〉</text>
+        </picker>
+      </view>
+      <view class="list-item" wx:if="{{comboCarbIdx > -1}}">
+        <text class="item-label">碳水重量 (g)</text>
+        <input class="ghost-input" type="number" value="{{comboCarbW}}" bindinput="inputComboCarbW" />
+      </view>
+      <view class="list-item" style="border-top: 1rpx solid #E5E5EA;">
+        <text class="item-label">包含蛋白来源</text>
+        <picker bindchange="changeComboPro" range="{{proteinList}}" range-key="name">
+          <text class="val-text blue">{{comboProIdx > -1 ? proteinList[comboProIdx].name : '点击选择'}} 〉</text>
+        </picker>
+      </view>
+      <view class="list-item" wx:if="{{comboProIdx > -1}}">
+        <text class="item-label">蛋白重量 (g)</text>
+        <input class="ghost-input" type="number" value="{{comboProW}}" bindinput="inputComboProW" />
+      </view>
+    </view>
+  </block>
+
+  <button class="primary-btn" bindtap="save">{{editIdx > -1 ? '保存修改' : '存储至本地库'}}</button>
 </view>

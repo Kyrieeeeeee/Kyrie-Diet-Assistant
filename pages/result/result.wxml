@@ -11,46 +11,61 @@
 
   <view class="section-header">建议精确食谱</view>
   <view class="ios-card" style="border: {{item.isPost ? '4rpx solid #007AFF' : 'none'}}; background: {{item.isPost ? '#F2F8FF' : '#fff'}}; padding:35rpx; border-radius:32rpx; margin-bottom:25rpx;" wx:for="{{meals}}" wx:key="name">
+    
     <view class="card-title" style="font-size: 36rpx; font-weight: 700; margin-bottom: 25rpx;">{{item.name}}</view>
     
-    <view class="food-row">
-      <view class="food-main">
-        <block wx:if="{{item.carbUnitObj}}">
-          <text class="big-num" style="font-size: 60rpx; font-weight: 800; color: #007AFF; margin-right: 6rpx;">{{item.carbUnitObj.num}}</text>
-          <text style="font-size:32rpx; font-weight:bold; margin-right: 16rpx;">{{item.carbUnitObj.name}}</text> 
-          <text style="font-weight: 600; font-size:32rpx;">{{item.carbName}}</text>
-          <view style="font-size: 26rpx; color: #8E8E93; margin-top: 8rpx;">
-            约 {{item.carbW}}g ({{item.carbRateDesc}})
-          </view>
-        </block>
-        <block wx:else>
-          <text class="big-num" style="font-size: 56rpx; font-weight: 700; color: #000; margin-right: 6rpx;">{{item.carbW}}</text><text style="font-size:28rpx; font-weight:bold;">g</text> 
-          <text style="font-weight: 500; margin-left:10rpx;">{{item.carbName}}</text>
-          <text style="font-size: 24rpx; color: #8E8E93; margin-left: 10rpx;">({{item.carbRateDesc}})</text>
-        </block>
+    <block wx:if="{{item.isCombo}}">
+      <view class="food-row" style="background:rgba(52, 199, 89, 0.1); padding:25rpx; border-radius:16rpx;">
+        <view style="font-size:36rpx; font-weight:800; color:#34C759; margin-bottom:12rpx;">🍱 {{item.comboName}}</view>
+        <view style="font-size:26rpx; color:#555; line-height:1.5; margin-bottom:20rpx;">{{item.comboDesc}}</view>
+        <view style="font-size:24rpx; color:#000; font-weight:600; display:flex; gap:30rpx;">
+           <text>已扣减配额: 碳水 {{item.carbW}}g</text>
+           <text>蛋白 {{item.proW}}g</text>
+        </view>
       </view>
-    </view>
-    
-    <view style="height: 1rpx; background: #E5E5EA; margin: 30rpx 0;"></view>
-    
-    <view class="food-row" wx:if="{{item.proW > 0}}">
-      <view class="food-main">
-        <block wx:if="{{item.proUnitObj}}">
-          <text class="big-num" style="font-size: 60rpx; font-weight: 800; color: #007AFF; margin-right: 6rpx;">{{item.proUnitObj.num}}</text>
-          <text style="font-size:32rpx; font-weight:bold; margin-right: 16rpx;">{{item.proUnitObj.name}}</text> 
-          <text style="font-weight: 600; font-size:32rpx;">{{item.proName}}</text>
-          <view style="font-size: 26rpx; color: #8E8E93; margin-top: 8rpx;">
-            约 {{item.proW}}g ({{item.proRateDesc}})
-          </view>
-        </block>
-        <block wx:else>
-          <text class="big-num" style="font-size: 56rpx; font-weight: 700; color: #000; margin-right: 6rpx;">{{item.proW}}</text><text style="font-size:28rpx; font-weight:bold;">g</text> 
-          <text style="font-weight: 500; margin-left:10rpx;">{{item.proName}}</text>
-          <text style="font-size: 24rpx; color: #8E8E93; margin-left: 10rpx;">({{item.proRateDesc}})</text>
-        </block>
+    </block>
+
+    <block wx:else>
+      <view class="food-row">
+        <view class="food-main">
+          <block wx:if="{{item.carbUnitObj}}">
+            <text class="big-num" style="font-size: 60rpx; font-weight: 800; color: #007AFF; margin-right: 6rpx;">{{item.carbUnitObj.num}}</text>
+            <text style="font-size:32rpx; font-weight:bold; margin-right: 16rpx;">{{item.carbUnitObj.name}}</text> 
+            <text style="font-weight: 600; font-size:32rpx;">{{item.carbName}}</text>
+            <view style="font-size: 26rpx; color: #8E8E93; margin-top: 8rpx;">
+              约 {{item.carbW}}g ({{item.carbRateDesc}})
+            </view>
+          </block>
+          <block wx:else>
+            <text class="big-num" style="font-size: 56rpx; font-weight: 700; color: #000; margin-right: 6rpx;">{{item.carbW}}</text><text style="font-size:28rpx; font-weight:bold;">g</text> 
+            <text style="font-weight: 500; margin-left:10rpx;">{{item.carbName}}</text>
+            <text style="font-size: 24rpx; color: #8E8E93; margin-left: 10rpx;">({{item.carbRateDesc}})</text>
+          </block>
+        </view>
       </view>
-    </view>
-    <view wx:else><text style="color:#8E8E93; font-size:28rpx;">本餐无需额外蛋白质</text></view>
+      
+      <view style="height: 1rpx; background: #E5E5EA; margin: 30rpx 0;"></view>
+      
+      <view class="food-row" wx:if="{{item.proW > 0}}">
+        <view class="food-main">
+          <block wx:if="{{item.proUnitObj}}">
+            <text class="big-num" style="font-size: 60rpx; font-weight: 800; color: #007AFF; margin-right: 6rpx;">{{item.proUnitObj.num}}</text>
+            <text style="font-size:32rpx; font-weight:bold; margin-right: 16rpx;">{{item.proUnitObj.name}}</text> 
+            <text style="font-weight: 600; font-size:32rpx;">{{item.proName}}</text>
+            <view style="font-size: 26rpx; color: #8E8E93; margin-top: 8rpx;">
+              约 {{item.proW}}g ({{item.proRateDesc}})
+            </view>
+          </block>
+          <block wx:else>
+            <text class="big-num" style="font-size: 56rpx; font-weight: 700; color: #000; margin-right: 6rpx;">{{item.proW}}</text><text style="font-size:28rpx; font-weight:bold;">g</text> 
+            <text style="font-weight: 500; margin-left:10rpx;">{{item.proName}}</text>
+            <text style="font-size: 24rpx; color: #8E8E93; margin-left: 10rpx;">({{item.proRateDesc}})</text>
+          </block>
+        </view>
+      </view>
+      <view wx:else><text style="color:#8E8E93; font-size:28rpx;">本餐无需额外蛋白质</text></view>
+    </block>
+
   </view>
 
   <button bindtap="goToLogic" style="background: transparent; color: #007AFF; border: 2rpx solid #007AFF; font-size: 32rpx; font-weight: 600; border-radius: 24rpx; padding: 20rpx 0; margin-top: 40rpx;">

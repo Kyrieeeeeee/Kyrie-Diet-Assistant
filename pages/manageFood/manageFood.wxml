@@ -4,6 +4,7 @@
   <view class="segment-control">
     <view class="seg-item {{tabIdx == 0 ? 'active' : ''}}" bindtap="switchTab" data-idx="0">🍚 碳水主食</view>
     <view class="seg-item {{tabIdx == 1 ? 'active' : ''}}" bindtap="switchTab" data-idx="1">🥩 蛋白质</view>
+    <view class="seg-item {{tabIdx == 2 ? 'active' : ''}}" bindtap="switchTab" data-idx="2">🍱 复合组装</view>
   </view>
 
   <view class="list-group" style="margin-top: 30rpx;">
@@ -11,9 +12,13 @@
       <view class="f-info">
         <text class="f-name">{{item.name}}</text>
         <view class="f-tags">
-          <text class="tag gray">营养率: {{(item.rate * 100)}}%</text>
-          <text class="tag blue" wx:if="{{item.unit}}">1{{item.unit.name}} = {{item.unit.weight}}g</text>
-          <text class="tag orange" wx:else>无特殊单位</text>
+          <block wx:if="{{!item.isCombo}}">
+            <text class="tag gray">营养率: {{(item.rate * 100)}}%</text>
+            <text class="tag blue" wx:if="{{item.unit}}">1{{item.unit.name}} = {{item.unit.weight}}g</text>
+          </block>
+          <block wx:else>
+            <text class="tag gray" style="white-space: normal;">{{item.desc}}</text>
+          </block>
         </view>
       </view>
       <view class="f-actions">
@@ -28,7 +33,6 @@
   <view class="modal-mask" wx:if="{{showEdit}}">
     <view class="modal-content ios-card">
       <view class="modal-title">编辑食材</view>
-      
       <view class="m-input-group">
         <text class="m-label">食材名称</text>
         <input class="m-input" value="{{editForm.name}}" bindinput="inputEditName"/>
@@ -38,14 +42,13 @@
         <input class="m-input" type="digit" value="{{editForm.per100}}" bindinput="inputEditPer100"/>
       </view>
       <view class="m-input-group">
-        <text class="m-label">单位名称 (可选，如:碗/块)</text>
-        <input class="m-input" value="{{editForm.unitName}}" placeholder="不填则清空单位" bindinput="inputEditUnitName"/>
+        <text class="m-label">单位名称</text>
+        <input class="m-input" value="{{editForm.unitName}}" bindinput="inputEditUnitName"/>
       </view>
       <view class="m-input-group" wx:if="{{editForm.unitName}}">
-        <text class="m-label">每1【{{editForm.unitName}}】重量(g)</text>
+        <text class="m-label">每单位重量(g)</text>
         <input class="m-input" type="digit" value="{{editForm.unitWeight}}" bindinput="inputEditUnitWeight"/>
       </view>
-
       <view class="modal-btns">
         <button class="m-btn cancel" bindtap="closeEdit">取消</button>
         <button class="m-btn confirm" bindtap="saveEdit">保存修改</button>

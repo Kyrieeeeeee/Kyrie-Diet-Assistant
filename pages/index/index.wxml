@@ -50,8 +50,8 @@
         </picker>
       </view>
       <view class="list-item">
-        <text class="item-label">当日运动时长(小时)</text>
-        <input class="ghost-input" type="digit" value="{{aerobicHours}}" bindinput="inputAerobicHours" placeholder="如: 0.5 或 1.0" />
+        <text class="item-label">当日时长 (小时)</text>
+        <input class="ghost-input" type="digit" value="{{aerobicHours}}" bindinput="inputAerobicHours" placeholder="如: 0.5" />
       </view>
     </block>
   </view>
@@ -75,39 +75,45 @@
     </block>
 
     <block wx:if="{{isAdvanced}}">
-      <view class="section-header" style="margin-top:20rpx; font-size:24rpx;">🌅 早餐食材</view>
-      <view class="list-item">
-        <text class="item-label">碳水来源</text>
-        <picker bindchange="pickBreakCarb" range="{{carbList}}" range-key="name"><text class="val-text">{{carbList[breakCarbIdx].name}} 〉</text></picker>
+      <view class="section-header" style="margin-top:20rpx; font-size:24rpx;">🌅 早餐配置</view>
+      <view class="list-item" style="background: #fdfdfd;">
+        <text class="item-label blue">🍱 复合来源 (可选)</text>
+        <picker bindchange="pickBreakCombo" range="{{comboList}}" range-key="name">
+          <text class="val-text">{{breakComboIdx > -1 ? comboList[breakComboIdx].name : '不使用'}} 〉</text>
+        </picker>
       </view>
-      <view class="list-item">
-        <text class="item-label">蛋白来源</text>
-        <picker bindchange="pickBreakPro" range="{{proteinList}}" range-key="name"><text class="val-text">{{proteinList[breakProIdx].name}} 〉</text></picker>
-      </view>
+      <block wx:if="{{breakComboIdx == -1}}">
+        <view class="list-item"><text class="item-label">碳水来源</text><picker bindchange="pickBreakCarb" range="{{carbList}}" range-key="name"><text class="val-text">{{carbList[breakCarbIdx].name}} 〉</text></picker></view>
+        <view class="list-item"><text class="item-label">蛋白来源</text><picker bindchange="pickBreakPro" range="{{proteinList}}" range-key="name"><text class="val-text">{{proteinList[breakProIdx].name}} 〉</text></picker></view>
+      </block>
 
-      <view class="section-header" style="margin-top:20rpx; font-size:24rpx;">🍱 午餐食材</view>
-      <view class="list-item">
-        <text class="item-label">碳水来源</text>
-        <picker bindchange="pickLunchCarb" range="{{carbList}}" range-key="name"><text class="val-text">{{carbList[lunchCarbIdx].name}} 〉</text></picker>
+      <view class="section-header" style="margin-top:20rpx; font-size:24rpx;">🍱 午餐配置</view>
+      <view class="list-item" style="background: #fdfdfd;">
+        <text class="item-label blue">🍱 复合来源 (可选)</text>
+        <picker bindchange="pickLunchCombo" range="{{comboList}}" range-key="name">
+          <text class="val-text">{{lunchComboIdx > -1 ? comboList[lunchComboIdx].name : '不使用'}} 〉</text>
+        </picker>
       </view>
-      <view class="list-item">
-        <text class="item-label">蛋白来源</text>
-        <picker bindchange="pickLunchPro" range="{{proteinList}}" range-key="name"><text class="val-text">{{proteinList[lunchProIdx].name}} 〉</text></picker>
-      </view>
+      <block wx:if="{{lunchComboIdx == -1}}">
+        <view class="list-item"><text class="item-label">碳水来源</text><picker bindchange="pickLunchCarb" range="{{carbList}}" range-key="name"><text class="val-text">{{carbList[lunchCarbIdx].name}} 〉</text></picker></view>
+        <view class="list-item"><text class="item-label">蛋白来源</text><picker bindchange="pickLunchPro" range="{{proteinList}}" range-key="name"><text class="val-text">{{proteinList[lunchProIdx].name}} 〉</text></picker></view>
+      </block>
 
-      <view class="section-header" style="margin-top:20rpx; font-size:24rpx;">🌙 晚餐食材</view>
-      <view class="list-item">
-        <text class="item-label">碳水来源</text>
-        <picker bindchange="pickDinnerCarb" range="{{carbList}}" range-key="name"><text class="val-text">{{carbList[dinnerCarbIdx].name}} 〉</text></picker>
+      <view class="section-header" style="margin-top:20rpx; font-size:24rpx;">🌙 晚餐配置</view>
+      <view class="list-item" style="background: #fdfdfd;">
+        <text class="item-label blue">🍱 复合来源 (可选)</text>
+        <picker bindchange="pickDinnerCombo" range="{{comboList}}" range-key="name">
+          <text class="val-text">{{dinnerComboIdx > -1 ? comboList[dinnerComboIdx].name : '不使用'}} 〉</text>
+        </picker>
       </view>
-      <view class="list-item">
-        <text class="item-label">蛋白来源</text>
-        <picker bindchange="pickDinnerPro" range="{{proteinList}}" range-key="name"><text class="val-text">{{proteinList[dinnerProIdx].name}} 〉</text></picker>
-      </view>
+      <block wx:if="{{dinnerComboIdx == -1}}">
+        <view class="list-item"><text class="item-label">碳水来源</text><picker bindchange="pickDinnerCarb" range="{{carbList}}" range-key="name"><text class="val-text">{{carbList[dinnerCarbIdx].name}} 〉</text></picker></view>
+        <view class="list-item"><text class="item-label">蛋白来源</text><picker bindchange="pickDinnerPro" range="{{proteinList}}" range-key="name"><text class="val-text">{{proteinList[dinnerProIdx].name}} 〉</text></picker></view>
+      </block>
     </block>
 
     <view class="list-item" bindtap="goToManageFood">
-      <text class="item-label blue">⚙️ 管理食材库 (编辑 / 加单位 / 删除)</text>
+      <text class="item-label blue">⚙️ 管理食材库 (编辑/加单位/复合管理)</text>
     </view>
   </view>
 
